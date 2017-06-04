@@ -5,9 +5,9 @@ defmodule FibonacciTest do
 
   test "fibonacci" do
     assert fib(0) == []
-    assert fib(1) == [0]
-    assert fib(2) == [0, 1]
-    assert fib(10) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+    assert fib(1) == [1]
+    assert fib(2) == [1, 1]
+    assert fib(10) == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
   end
 
 
