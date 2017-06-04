@@ -3,7 +3,7 @@ defmodule Fibonacci do
   Demonstrate your recursion skills by implementing the Fibonacci series!
   """
 
-  @spec fib (integer) :: List
+  @spec fib(integer) :: list
   def fib(n) do
     []
   end
