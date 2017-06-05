@@ -42,16 +42,19 @@ hungry, and the circle repeats itself.
       if length(waiting) > 0 do
         names = for {_, phil} <- waiting, do: phil.name
         Logger.debug "#{length waiting} philosopher#{if length(waiting) == 1, do: '', else: 's'} waiting: #{Enum.join names, ", "}"
-
-        # they should eat!
+        if length(chopsticks) >= 2 do
+          [{pid, _} | waiting] = waiting
+          [chopstick1, chopstick2 | chopsticks] = chopsticks
+          send pid, {:eat, [chopstick1, chopstick2]}
+        end
       end
-
-      # Manage sit down or give up
       receive do
         {:sit_down, pid, phil} ->
-          nil # we should do something...
+          manage_resources(chopsticks, [{pid, phil} | waiting])
         {:give_up_seat, free_chopsticks, _} ->
-          nil # we should do something...
+          chopsticks = free_chopsticks ++ chopsticks
+          Logger.debug "#{length chopsticks} chopstick#{if length(chopsticks) == 1, do: '', else: 's'} available"
+          manage_resources(chopsticks, waiting)
       end
     end
 
