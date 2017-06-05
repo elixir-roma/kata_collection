@@ -5,7 +5,7 @@ defmodule HelloWorld do
   How do we want to solve it?
   """
 
-  def hello do
-    IO.puts "Hello world"
+  def hello(print) do
+    print.("Hello world")
   end
 end
