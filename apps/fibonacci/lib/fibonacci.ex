@@ -8,16 +8,16 @@ defmodule Fibonacci do
   def fib(n)
 
   def fib(n) when n < 2 do
-    Enum.take @seed, n
+    Enum.reverse(@seed) |> Enum.take(n)
   end
 
   def fib(n) when n >= 2 do
     fib(@seed, n - 2)
   end
 
-  defp fib(acc, 0), do: acc
+  defp fib(acc, 0), do: Enum.reverse(acc)
 
-  defp fib(acc, n) do
-    fib(acc ++ [Enum.at(acc, -2) + Enum.at(acc, -1)], n - 1)
+  defp fib([first, second | _] = lst, n) do
+    fib([first + second | lst], n - 1)
   end
 end
